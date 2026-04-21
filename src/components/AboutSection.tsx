@@ -3,7 +3,7 @@ import { WhatsAppCTA } from "@/components/WhatsAppButton";
 
 const solutions = [
   { icon: ShieldCheck, title: "Procedência garantida", desc: "Todos os produtos com registro ANVISA e rastreabilidade completa de lotes." },
-  { icon: FileCheck, title: "Nota fiscal e documentação", desc: "Toda compra acompanhada de nota fiscal, laudos e certificados de autenticidade." },
+  { icon: FileCheck, title: "Nota fiscal e documentação", desc: "Toda compra acompanhada de Nota Fiscal" },
   { icon: HeartHandshake, title: "Atendimento consultivo", desc: "Equipe especializada para ajudar na escolha dos melhores produtos para sua clínica." },
   { icon: Headphones, title: "Suporte completo", desc: "Acompanhamento pós-venda, suporte técnico e orientação sobre armazenamento." },
 ];
@@ -19,7 +19,7 @@ const AboutSection = () => (
           EstéticaBio: Sua distribuidora de confiança
         </h2>
         <p className="mt-4 text-muted-foreground">
-          Somos uma distribuidora autorizada de produtos para estética avançada, com parceria estratégica com instituições de ensino como o Nepuga. Atuamos com foco em segurança, legalidade e excelência para o profissional.
+          Somos uma distribuidora Autorizada de produtos para estética avançada, com parcerias estratégicas com Clínicas e Instituições de Ensino. Atuamos com foco em segurança, legalidade e excelência para o profissional.
         </p>
       </div>
 

@@ -2,7 +2,7 @@ import { ShieldCheck, GraduationCap, Truck, HeartHandshake, ClipboardCheck, User
 
 const diffs = [
   { icon: ShieldCheck, title: "Regulamentação ANVISA", desc: "100% dos produtos com registro ativo na ANVISA." },
-  { icon: GraduationCap, title: "Parceria com ensino", desc: "Parceiros de instituições como o Nepuga, atendendo alunos e professores." },
+  { icon: GraduationCap, title: "Parceria com ensino", desc: "Parcerias com instituições de ensino, atendendo alunos e professores. Venha ser nosso parceiro também" },
   { icon: Truck, title: "Entrega rápida", desc: "Logística otimizada para todo o Brasil com embalagens especiais." },
   { icon: HeartHandshake, title: "Atendimento humanizado", desc: "Relacionamento próximo e consultoria personalizada." },
   { icon: ClipboardCheck, title: "Consultoria comercial", desc: "Ajudamos você a montar o mix ideal para sua clínica." },

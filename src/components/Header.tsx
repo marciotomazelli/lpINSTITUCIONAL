@@ -32,7 +32,7 @@ const Header = () => {
             </a>
           ))}
           <Button size="sm" className="bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90" asChild>
-            <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/5516991232051" target="_blank" rel="noopener noreferrer">
               <MessageCircle className="mr-1 h-4 w-4" /> WhatsApp
             </a>
           </Button>
@@ -56,7 +56,7 @@ const Header = () => {
             </a>
           ))}
           <Button size="sm" className="bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90" asChild>
-            <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
+            <a href="https://wa.me/5516991232051" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
               <MessageCircle className="mr-1 h-4 w-4" /> WhatsApp
             </a>
           </Button>

@@ -32,7 +32,7 @@ const HeroSection = () => (
       <WhatsAppCTA />
 
       <p className="text-xs text-muted-foreground">
-        ✅ Atendimento de segunda a sexta, das 8h às 18h
+        ✅ Atendimento de segunda a sexta, das 8hs as 17:30hs
       </p>
     </div>
   </section>

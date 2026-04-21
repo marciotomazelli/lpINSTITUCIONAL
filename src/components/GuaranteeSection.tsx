@@ -3,7 +3,7 @@ import { ShieldCheck, Package, Eye } from "lucide-react";
 const guarantees = [
   { icon: ShieldCheck, title: "Compra segura", desc: "Pagamento protegido e dados criptografados em todas as transações." },
   { icon: Package, title: "Produtos originais", desc: "Garantia de autenticidade com rastreabilidade de lote e validade." },
-  { icon: Eye, title: "Transparência total", desc: "Nota fiscal, laudos técnicos e certificados disponíveis em toda compra." },
+  { icon: Eye, title: "Transparência total", desc: "Nota Fiscal, Materiais relacionados aos produtos, certificados, disponíveis conforme sua necessidade" },
 ];
 
 const GuaranteeSection = () => (

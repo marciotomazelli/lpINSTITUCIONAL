@@ -30,7 +30,7 @@ const testimonials = [
 ];
 
 const SHARE_REVIEW_URL =
-  "https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20deixar%20meu%20depoimento%20sobre%20a%20EstéticaBio%20para%20ser%20publicado%20no%20site.";
+  "https://wa.me/5516991232051?text=Olá!%20Gostaria%20de%20deixar%20meu%20depoimento%20sobre%20a%20EstéticaBio%20para%20ser%20publicado%20no%20site.";
 
 const GOOGLE_REVIEWS_URL =
   "https://www.google.com/search?q=Est%C3%A9ticaBio+Sertaozinho#lrd=0x0:0x0,1";
