@@ -555,18 +555,16 @@
 
       <section id="contato" class="bg-muted/30 py-24 md:py-32">
         <div class="container mx-auto px-4">
-          <!-- Mobile Title -->
-          <div class="md:hidden text-center mb-12" data-aos="fade-up">
-            <h2 class="text-4xl font-extrabold tracking-tight text-foreground">Fale conosco</h2>
-            <p class="mt-4 text-lg text-muted-foreground leading-relaxed">Solicite uma cotação personalizada. Respondemos em até 2 horas úteis.</p>
+          <!-- Section Header -->
+          <div class="mb-12 text-center md:text-left" data-aos="fade-up">
+            <h2 class="text-4xl font-extrabold tracking-tight md:text-6xl text-foreground">Fale conosco</h2>
+            <p class="mt-4 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">Solicite uma cotação personalizada. Respondemos em até 2 horas úteis.</p>
           </div>
 
-          <div class="mx-auto max-w-4xl flex flex-col-reverse md:grid md:grid-cols-2 gap-20">
-            <div data-aos="fade-right">
-              <h2 class="hidden md:block text-4xl font-extrabold tracking-tight md:text-6xl text-foreground">Fale conosco</h2>
-              <p class="hidden md:block mt-6 text-xl text-muted-foreground leading-relaxed">Solicite uma cotação personalizada. Respondemos em até 2 horas úteis.</p>
-              
-              <div class="mt-12 flex flex-col gap-8">
+          <div class="mx-auto max-w-6xl flex flex-col-reverse md:grid md:grid-cols-2 gap-12 md:gap-20">
+            <!-- Left Side: Contact Info -->
+            <div data-aos="fade-right" class="space-y-10">
+              <div class="flex flex-col gap-8">
                 <div class="flex items-start gap-6">
                   <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary"><i data-lucide="map-pin" class="h-7 w-7"></i></div>
                   <div>
@@ -598,7 +596,8 @@
               </div>
             </div>
 
-            <div class="rounded-[2.5rem] bg-background border p-10 shadow-2xl" data-aos="fade-left">
+            <!-- Right Side: Form -->
+            <div class="rounded-[2.5rem] bg-background border p-8 md:p-10 shadow-2xl" data-aos="fade-left">
               <form id="lead-form" class="flex flex-col gap-6">
                 <div class="grid gap-2">
                     <label class="text-sm font-bold ml-1">Nome Completo</label>
