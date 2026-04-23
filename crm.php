@@ -1,4 +1,5 @@
 <?php
+// CRM EstéticaBio - v1.0.1 - Filters and Clean URLs
 require_once 'config.php';
 session_start();
 
