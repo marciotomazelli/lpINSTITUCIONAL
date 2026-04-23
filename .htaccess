@@ -1,3 +1,9 @@
+# Clean URLs
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
 # Compressão GZIP
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain

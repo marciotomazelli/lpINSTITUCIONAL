@@ -15,15 +15,46 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
 // Logout logic
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: crm.php');
+    header('Location: crm');
     exit;
 }
 
 // Fetch leads if authenticated
 $leads = [];
+$error = null;
 if ($authenticated) {
     try {
-        $stmt = $pdo->query("SELECT * FROM leads ORDER BY created_at DESC");
+        $where = [];
+        $params = [];
+
+        if (!empty($_GET['status'])) {
+            $where[] = "status = :status";
+            $params[':status'] = $_GET['status'];
+        }
+        
+        if (!empty($_GET['start_date'])) {
+            $where[] = "created_at >= :start_date";
+            $params[':start_date'] = $_GET['start_date'] . ' 00:00:00';
+        }
+        
+        if (!empty($_GET['end_date'])) {
+            $where[] = "created_at <= :end_date";
+            $params[':end_date'] = $_GET['end_date'] . ' 23:59:59';
+        }
+        
+        if (!empty($_GET['search'])) {
+            $where[] = "(name LIKE :search OR email LIKE :search OR phone LIKE :search)";
+            $params[':search'] = '%' . $_GET['search'] . '%';
+        }
+
+        $query = "SELECT * FROM leads";
+        if ($where) {
+            $query .= " WHERE " . implode(" AND ", $where);
+        }
+        $query .= " ORDER BY created_at DESC";
+
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($params);
         $leads = $stmt->fetchAll();
     } catch (PDOException $e) {
         $error = "Erro ao carregar leads: " . $e->getMessage();
@@ -135,6 +166,22 @@ if ($authenticated) {
             }
         }
 
+        /* Filter bar */
+        .filter-bar { 
+            background: white; 
+            padding: 1.5rem; 
+            border-radius: var(--radius); 
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+        .filter-group { flex: 1; min-width: 150px; }
+        .filter-group label { display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--muted-foreground); text-transform: uppercase; }
+        .filter-group .input, .filter-group .select { height: 2.5rem; font-size: 0.875rem; }
+        
         /* Modal Styles */
         .modal {
             display: none;
@@ -192,13 +239,53 @@ if ($authenticated) {
                 <p style="font-size: 0.875rem; color: var(--muted-foreground);">Gestão de contatos recebidos</p>
             </div>
             <div class="flex gap-2">
-                <a href="index.php" class="btn btn-outline">Ver Site</a>
+                <a href="./" class="btn btn-outline">Ver Site</a>
                 <a href="?logout=1" class="btn btn-outline" style="color: red;">Sair</a>
             </div>
         </div>
     </div>
 
     <div class="crm-container">
+        <!-- Filters -->
+        <form method="GET" class="filter-bar">
+            <div class="filter-group" style="flex: 2; min-width: 200px;">
+                <label>Pesquisar</label>
+                <input type="text" name="search" class="input" placeholder="Nome, email ou telefone..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+            </div>
+            
+            <div class="filter-group">
+                <label>Status</label>
+                <select name="status" class="select">
+                    <option value="">Todos</option>
+                    <option value="Novo" <?php echo ($_GET['status'] ?? '') === 'Novo' ? 'selected' : ''; ?>>Novo</option>
+                    <option value="Em Contato" <?php echo ($_GET['status'] ?? '') === 'Em Contato' ? 'selected' : ''; ?>>Em Contato</option>
+                    <option value="Ganho" <?php echo ($_GET['status'] ?? '') === 'Ganho' ? 'selected' : ''; ?>>Ganho</option>
+                    <option value="Perdido" <?php echo ($_GET['status'] ?? '') === 'Perdido' ? 'selected' : ''; ?>>Perdido</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Desde</label>
+                <input type="date" name="start_date" class="input" value="<?php echo htmlspecialchars($_GET['start_date'] ?? ''); ?>">
+            </div>
+            
+            <div class="filter-group">
+                <label>Até</label>
+                <input type="date" name="end_date" class="input" value="<?php echo htmlspecialchars($_GET['end_date'] ?? ''); ?>">
+            </div>
+            
+            <div class="flex gap-2">
+                <button type="submit" class="btn btn-primary" style="height: 2.5rem; padding: 0 1.5rem;">Filtrar</button>
+                <a href="crm" class="btn btn-outline" style="height: 2.5rem; display: flex; items-center: center;">Limpar</a>
+            </div>
+        </form>
+
+        <?php if ($error): ?>
+            <div style="background: #fee2e2; color: #b91c1c; padding: 1rem; border-radius: var(--radius); margin-bottom: 2rem;">
+                <?php echo $error; ?>
+            </div>
+        <?php endif; ?>
+
         <div class="leads-table-container">
             <table>
                 <thead>
