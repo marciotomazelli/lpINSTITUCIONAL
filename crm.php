@@ -103,6 +103,20 @@ if ($authenticated) {
                 overflow: hidden; 
             }
         }
+        
+        .btn-action {
+            width: 2rem;
+            height: 2rem;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-action i {
+            width: 14px;
+            height: 14px;
+        }
 
         /* Mobile Table to Card Transformation */
         @media (max-width: 767px) {
@@ -164,6 +178,16 @@ if ($authenticated) {
                 justify-content: flex-end;
                 gap: 0.75rem;
                 padding-left: 40%;
+                align-items: center;
+            }
+            
+            .btn-action {
+                width: 2.75rem !important;
+                height: 2.75rem !important;
+            }
+            .btn-action i {
+                width: 1.25rem !important;
+                height: 1.25rem !important;
             }
         }
 
@@ -329,27 +353,27 @@ if ($authenticated) {
                                 </td>
                                 <td>
                                     <div class="flex gap-2">
-                                        <button class="btn btn-outline btn-edit" 
+                                        <button class="btn btn-outline btn-edit btn-action" 
                                                 data-id="<?php echo $lead['id']; ?>" 
                                                 data-name="<?php echo htmlspecialchars($lead['name']); ?>"
                                                 data-email="<?php echo htmlspecialchars($lead['email']); ?>"
                                                 data-phone="<?php echo htmlspecialchars($lead['phone']); ?>"
                                                 data-specialty="<?php echo htmlspecialchars($lead['specialty']); ?>"
                                                 data-message="<?php echo htmlspecialchars($lead['message']); ?>"
-                                                style="padding: 0.5rem; height: 2rem; width: 2rem;" title="Editar">
-                                            <i data-lucide="pencil" style="width: 14px; height: 14px;"></i>
+                                                title="Editar">
+                                            <i data-lucide="pencil"></i>
                                         </button>
                                         
-                                        <button class="btn btn-whatsapp btn-share" 
+                                        <button class="btn btn-whatsapp btn-share btn-action" 
                                                 data-name="<?php echo htmlspecialchars($lead['name']); ?>"
                                                 data-phone="<?php echo htmlspecialchars($lead['phone']); ?>"
                                                 data-specialty="<?php echo htmlspecialchars($lead['specialty']); ?>"
-                                                style="padding: 0.5rem; height: 2rem; width: 2rem;" title="Enviar para Vendedor">
-                                            <i data-lucide="share-2" style="width: 14px; height: 14px;"></i>
+                                                title="Enviar para Vendedor">
+                                            <i data-lucide="share-2"></i>
                                         </button>
 
-                                        <button class="btn btn-outline btn-delete" data-id="<?php echo $lead['id']; ?>" style="padding: 0.5rem; height: 2rem; width: 2rem; color: red;" title="Excluir">
-                                            <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                                        <button class="btn btn-outline btn-delete btn-action" data-id="<?php echo $lead['id']; ?>" style="color: red;" title="Excluir">
+                                            <i data-lucide="trash-2"></i>
                                         </button>
                                     </div>
                                 </td>

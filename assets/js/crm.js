@@ -24,15 +24,74 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStatus(id, newStatus, 0);
     });
 
-    // Modal Close Logic (Delegation)
-    document.addEventListener('click', (e) => {
+    // Global Click Event Delegation
+    document.addEventListener('click', async (e) => {
+        // Modal Close Logic
         if (e.target.closest('.close-modal') || e.target.classList.contains('modal')) {
             const openModals = document.querySelectorAll('.modal.active');
             openModals.forEach(modal => {
                 modal.classList.remove('active');
-                // If it was the value modal, we might want to reload to reset the select
                 if (modal.id === 'value-modal') location.reload();
             });
+            return;
+        }
+
+        // Deletion
+        const deleteBtn = e.target.closest('.btn-delete');
+        if (deleteBtn) {
+            e.preventDefault();
+            if (!confirm('Deseja realmente excluir este lead?')) return;
+            const id = deleteBtn.dataset.id;
+            try {
+                const response = await fetch('api/delete_lead.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id })
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    const row = document.getElementById(`lead-${id}`);
+                    if (row) row.remove();
+                    else location.reload();
+                } else {
+                    alert('Erro ao excluir lead');
+                }
+            } catch (error) {
+                alert('Erro de conexão');
+            }
+            return;
+        }
+
+        // Edit
+        const editBtn = e.target.closest('.btn-edit');
+        if (editBtn) {
+            e.preventDefault();
+            const data = editBtn.dataset;
+            document.getElementById('edit-id').value = data.id || '';
+            document.getElementById('edit-name').value = data.name || '';
+            document.getElementById('edit-email').value = data.email || '';
+            document.getElementById('edit-phone').value = data.phone || '';
+            document.getElementById('edit-specialty').value = data.specialty || '';
+            document.getElementById('edit-message').value = data.message || '';
+            document.getElementById('edit-modal').classList.add('active');
+            return;
+        }
+
+        // Share
+        const shareBtn = e.target.closest('.btn-share');
+        if (shareBtn) {
+            e.preventDefault();
+            const data = shareBtn.dataset;
+            const text = `*Novo Lead para Atendimento*\n\n` +
+                         `*Nome:* ${data.name}\n` +
+                         `*Telefone:* ${data.phone}\n` +
+                         `*Especialidade:* ${data.specialty}\n\n` +
+                         `Pode atender este cliente?`;
+            
+            const encodedText = encodeURIComponent(text);
+            const waUrl = `https://wa.me/?text=${encodedText}`;
+            window.open(waUrl, '_blank');
+            return;
         }
     });
 
@@ -90,58 +149,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Lead Actions Delegation
-    document.addEventListener('click', async (e) => {
-        // Deletion
-        const deleteBtn = e.target.closest('.btn-delete');
-        if (deleteBtn) {
-            if (!confirm('Deseja realmente excluir este lead?')) return;
-            const id = deleteBtn.dataset.id;
-            try {
-                const response = await fetch('api/delete_lead.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id })
-                });
-                const result = await response.json();
-                if (result.status === 'success') {
-                    document.getElementById(`lead-${id}`).remove();
-                } else {
-                    alert('Erro ao excluir lead');
-                }
-            } catch (error) {
-                alert('Erro de conexão');
-            }
-            return;
-        }
-
-        // Edit
-        const editBtn = e.target.closest('.btn-edit');
-        if (editBtn) {
-            const data = editBtn.dataset;
-            document.getElementById('edit-id').value = data.id;
-            document.getElementById('edit-name').value = data.name;
-            document.getElementById('edit-email').value = data.email;
-            document.getElementById('edit-phone').value = data.phone;
-            document.getElementById('edit-specialty').value = data.specialty;
-            document.getElementById('edit-message').value = data.message;
-            document.getElementById('edit-modal').classList.add('active');
-            return;
-        }
-
-        // Share
-        const shareBtn = e.target.closest('.btn-share');
-        if (shareBtn) {
-            const data = shareBtn.dataset;
-            const text = `*Novo Lead para Atendimento*\n\n` +
-                         `*Nome:* ${data.name}\n` +
-                         `*Telefone:* ${data.phone}\n` +
-                         `*Especialidade:* ${data.specialty}\n\n` +
-                         `Pode atender este cliente?`;
-            
-            const encodedText = encodeURIComponent(text);
-            window.open(`https://wa.me/?text=${encodedText}`, '_blank');
-            return;
-        }
-    });
 });
