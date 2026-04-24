@@ -1,8 +1,8 @@
 <?php
 // Configurações do Banco de Dados
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'crmesteticabio');
-define('DB_USER', 'crmesteticabio');
+define('DB_NAME', 'este7915_crmesteticabio');
+define('DB_USER', 'este7915_crmesteticabio');
 define('DB_PASS', 'crmesteticabio');
 
 // Configurações do Sistema
