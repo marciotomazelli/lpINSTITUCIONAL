@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const encodedText = encodeURIComponent(text);
             const waUrl = `https://wa.me/?text=${encodedText}`;
-            window.open(waUrl, '_blank');
+            window.location.href = waUrl;
             return;
         }
     });

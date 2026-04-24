@@ -105,17 +105,20 @@ if ($authenticated) {
         }
         
         .btn-action {
-            width: 2rem;
-            height: 2rem;
+            width: 2.25rem;
+            height: 2.25rem;
             padding: 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50% !important;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .btn-action i {
+        .btn-action i, .btn-action svg {
             width: 14px;
             height: 14px;
+            pointer-events: none;
         }
 
         /* Mobile Table to Card Transformation */
@@ -176,14 +179,22 @@ if ($authenticated) {
             td:last-of-type {
                 display: flex;
                 justify-content: flex-end;
-                gap: 0.75rem;
-                padding-left: 40%;
+                gap: 0.5rem;
+                padding-left: 35%;
                 align-items: center;
+                flex-wrap: wrap;
             }
             
             .btn-action {
-                width: 2.75rem !important;
-                height: 2.75rem !important;
+                width: 3rem !important;
+                height: 3rem !important;
+                border-radius: 50% !important;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+            .btn-action:active {
+                transform: scale(0.92);
+                opacity: 0.8;
             }
             .btn-action i {
                 width: 1.25rem !important;
