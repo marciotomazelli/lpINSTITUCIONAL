@@ -1,8 +1,8 @@
 <?php
 // Configurações do Banco de Dados
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'este7915_crmesteticabio');
-define('DB_USER', 'este7915_crmesteticabio');
+define('DB_NAME', 'crmesteticabio');
+define('DB_USER', 'crmesteticabio');
 define('DB_PASS', 'crmesteticabio');
 
 // Configurações do Sistema
@@ -14,8 +14,8 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    // Temporariamente habilitado para debug:
-    die("Erro na conexão: " . $e->getMessage());
-    // error_log($e->getMessage());
+    // Em produção, não exiba o erro detalhado
+    // die("Erro na conexão com o banco de dados.");
+    error_log($e->getMessage());
 }
 ?>

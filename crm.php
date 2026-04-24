@@ -133,6 +133,7 @@ if ($authenticated) {
                 border: 1px solid var(--border);
                 position: relative;
                 padding: 1rem;
+                overflow: hidden;
             }
             td { 
                 border: none; 
@@ -178,11 +179,20 @@ if ($authenticated) {
             
             td:last-of-type {
                 display: flex;
-                justify-content: flex-end;
-                gap: 0.5rem;
-                padding-left: 35%;
+                justify-content: space-around;
+                gap: 1rem;
+                padding: 1.25rem !important;
                 align-items: center;
-                flex-wrap: wrap;
+                background: #fafafa;
+                border-top: 1px solid var(--border);
+                margin: 1rem -1rem -1rem -1rem;
+                width: calc(100% + 2rem);
+                border-radius: 0 0 var(--radius) var(--radius);
+                position: relative;
+                z-index: 5;
+            }
+            td:last-of-type:before {
+                display: none !important;
             }
             
             .btn-action {
@@ -363,8 +373,8 @@ if ($authenticated) {
                                     <?php echo $lead['sale_value'] > 0 ? 'R$ ' . number_format($lead['sale_value'], 2, ',', '.') : '-'; ?>
                                 </td>
                                 <td>
-                                    <div class="flex gap-2">
-                                        <button class="btn btn-outline btn-edit btn-action" 
+                                    <div class="flex gap-4">
+                                        <button type="button" class="btn btn-outline btn-edit btn-action" 
                                                 data-id="<?php echo $lead['id']; ?>" 
                                                 data-name="<?php echo htmlspecialchars($lead['name']); ?>"
                                                 data-email="<?php echo htmlspecialchars($lead['email']); ?>"
@@ -375,15 +385,15 @@ if ($authenticated) {
                                             <i data-lucide="pencil"></i>
                                         </button>
                                         
-                                        <button class="btn btn-whatsapp btn-share btn-action" 
+                                        <button type="button" class="btn btn-whatsapp btn-share btn-action" 
                                                 data-name="<?php echo htmlspecialchars($lead['name']); ?>"
                                                 data-phone="<?php echo htmlspecialchars($lead['phone']); ?>"
                                                 data-specialty="<?php echo htmlspecialchars($lead['specialty']); ?>"
                                                 title="Enviar para Vendedor">
                                             <i data-lucide="share-2"></i>
                                         </button>
-
-                                        <button class="btn btn-outline btn-delete btn-action" data-id="<?php echo $lead['id']; ?>" style="color: red;" title="Excluir">
+ 
+                                        <button type="button" class="btn btn-outline btn-delete btn-action" data-id="<?php echo $lead['id']; ?>" style="color: red;" title="Excluir">
                                             <i data-lucide="trash-2"></i>
                                         </button>
                                     </div>
