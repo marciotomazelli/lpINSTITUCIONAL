@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('edit-email').value = data.email || '';
             document.getElementById('edit-phone').value = data.phone || '';
             document.getElementById('edit-classification').value = data.classification || 'Não Cliente';
+            document.getElementById('edit-status').value = data.status || 'Novo';
             document.getElementById('edit-specialty').value = data.specialty || '';
             document.getElementById('edit-message').value = data.message || '';
             document.getElementById('edit-modal').classList.add('active');
@@ -79,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Manage Statuses
-        if (e.target.id === 'manage-statuses-btn') {
+        const manageBtn = e.target.closest('#manage-statuses-btn');
+        if (manageBtn) {
             document.getElementById('status-modal').classList.add('active');
             fetchStatuses();
             return;

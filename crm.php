@@ -419,6 +419,7 @@ if ($authenticated) {
                                                 data-email="<?php echo htmlspecialchars($lead['email']); ?>"
                                                 data-phone="<?php echo htmlspecialchars($lead['phone']); ?>"
                                                 data-classification="<?php echo htmlspecialchars($lead['classification']); ?>"
+                                                data-status="<?php echo htmlspecialchars($lead['status']); ?>"
                                                 data-specialty="<?php echo htmlspecialchars($lead['specialty']); ?>"
                                                 data-message="<?php echo htmlspecialchars($lead['message']); ?>"
                                                 title="Editar">
@@ -474,6 +475,16 @@ if ($authenticated) {
                         <option value="Cliente">Já é Cliente</option>
                         <option value="Suporte">Suporte</option>
                         <option value="Parceiro">Parceiro</option>
+                    </select>
+                </div>
+                <div class="grid gap-1">
+                    <label style="font-size: 0.75rem; font-weight: 700;">Status do Atendimento</label>
+                    <select name="status" id="edit-status" class="select" required>
+                        <?php foreach ($all_statuses as $st): ?>
+                            <option value="<?php echo htmlspecialchars($st['name']); ?>">
+                                <?php echo htmlspecialchars($st['name']); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="grid gap-1">
