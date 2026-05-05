@@ -57,6 +57,10 @@ if ($authenticated) {
         $stmt = $pdo->prepare($query);
         $stmt->execute($params);
         $leads = $stmt->fetchAll();
+
+        // Fetch dynamic statuses
+        $stmtStatus = $pdo->query("SELECT * FROM lead_statuses ORDER BY id ASC");
+        $all_statuses = $stmtStatus->fetchAll();
     } catch (PDOException $e) {
         $error = "Erro ao carregar leads: " . $e->getMessage();
     }
@@ -260,6 +264,25 @@ if ($authenticated) {
         .modal-header h3 { font-size: 1.25rem; font-weight: 700; }
         .close-modal { cursor: pointer; color: var(--muted-foreground); transition: color 0.2s; }
         .close-modal:hover { color: var(--foreground); }
+
+        /* Status Pills in Management */
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: #f9fafb;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .status-pill {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
     </style>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -285,6 +308,7 @@ if ($authenticated) {
                 <p style="font-size: 0.875rem; color: var(--muted-foreground);">Gestão de contatos recebidos</p>
             </div>
             <div class="flex gap-2">
+                <button id="manage-statuses-btn" class="btn btn-outline">Gerenciar Status</button>
                 <a href="./" class="btn btn-outline">Ver Site</a>
                 <a href="?logout=1" class="btn btn-outline" style="color: red;">Sair</a>
             </div>
@@ -303,10 +327,11 @@ if ($authenticated) {
                 <label>Status</label>
                 <select name="status" class="select">
                     <option value="">Todos</option>
-                    <option value="Novo" <?php echo ($_GET['status'] ?? '') === 'Novo' ? 'selected' : ''; ?>>Novo</option>
-                    <option value="Em Contato" <?php echo ($_GET['status'] ?? '') === 'Em Contato' ? 'selected' : ''; ?>>Em Contato</option>
-                    <option value="Ganho" <?php echo ($_GET['status'] ?? '') === 'Ganho' ? 'selected' : ''; ?>>Ganho</option>
-                    <option value="Perdido" <?php echo ($_GET['status'] ?? '') === 'Perdido' ? 'selected' : ''; ?>>Perdido</option>
+                    <?php foreach ($all_statuses as $st): ?>
+                        <option value="<?php echo htmlspecialchars($st['name']); ?>" <?php echo ($_GET['status'] ?? '') === $st['name'] ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($st['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             
@@ -338,7 +363,8 @@ if ($authenticated) {
                     <tr>
                         <th>Data</th>
                         <th>Cliente</th>
-                        <th>Especialidade/Profissão</th>
+                        <th>Classificação</th>
+                        <th>Especialidade</th>
                         <th>Mensagem</th>
                         <th>Status</th>
                         <th>Valor (R$)</th>
@@ -359,14 +385,20 @@ if ($authenticated) {
                                         <?php echo htmlspecialchars($lead['phone']); ?>
                                     </a>
                                 </td>
+                                <td style="font-size: 0.8rem;">
+                                    <span class="status-pill" style="background: #f1f5f9; color: #475569; padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid #e2e8f0;">
+                                        <?php echo htmlspecialchars($lead['classification']); ?>
+                                    </span>
+                                </td>
                                 <td style="font-size: 0.8rem;"><?php echo htmlspecialchars($lead['specialty']); ?></td>
                                 <td style="max-width: 250px; font-size: 0.8rem; opacity: 0.8;"><?php echo nl2br(htmlspecialchars($lead['message'])); ?></td>
                                 <td>
                                     <select class="select status-select" data-id="<?php echo $lead['id']; ?>" style="padding: 0.4rem; font-size: 0.75rem; height: auto; min-width: 120px;">
-                                        <option value="Novo" <?php echo $lead['status'] === 'Novo' ? 'selected' : ''; ?>>Novo</option>
-                                        <option value="Em Contato" <?php echo $lead['status'] === 'Em Contato' ? 'selected' : ''; ?>>Em Contato</option>
-                                        <option value="Ganho" <?php echo $lead['status'] === 'Ganho' ? 'selected' : ''; ?>>Venda Ganha</option>
-                                        <option value="Perdido" <?php echo $lead['status'] === 'Perdido' ? 'selected' : ''; ?>>Venda Perdida</option>
+                                        <?php foreach ($all_statuses as $st): ?>
+                                            <option value="<?php echo htmlspecialchars($st['name']); ?>" <?php echo $lead['status'] === $st['name'] ? 'selected' : ''; ?>>
+                                                <?php echo htmlspecialchars($st['name']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </td>
                                 <td style="font-weight: 700; color: var(--primary);">
@@ -379,6 +411,7 @@ if ($authenticated) {
                                                 data-name="<?php echo htmlspecialchars($lead['name']); ?>"
                                                 data-email="<?php echo htmlspecialchars($lead['email']); ?>"
                                                 data-phone="<?php echo htmlspecialchars($lead['phone']); ?>"
+                                                data-classification="<?php echo htmlspecialchars($lead['classification']); ?>"
                                                 data-specialty="<?php echo htmlspecialchars($lead['specialty']); ?>"
                                                 data-message="<?php echo htmlspecialchars($lead['message']); ?>"
                                                 title="Editar">
@@ -428,6 +461,15 @@ if ($authenticated) {
                     <input type="text" name="phone" id="edit-phone" class="input">
                 </div>
                 <div class="grid gap-1">
+                    <label style="font-size: 0.75rem; font-weight: 700;">Classificação</label>
+                    <select name="classification" id="edit-classification" class="select" required>
+                        <option value="Não Cliente">Não Cliente</option>
+                        <option value="Cliente">Já é Cliente</option>
+                        <option value="Suporte">Suporte</option>
+                        <option value="Parceiro">Parceiro</option>
+                    </select>
+                </div>
+                <div class="grid gap-1">
                     <label style="font-size: 0.75rem; font-weight: 700;">Especialidade</label>
                     <select name="specialty" id="edit-specialty" class="select" required>
                         <option value="Biomédico">Biomédico</option>
@@ -466,6 +508,34 @@ if ($authenticated) {
                 </div>
                 <button type="submit" class="btn btn-primary">Confirmar e Salvar</button>
             </form>
+        </div>
+    <!-- Manage Statuses Modal -->
+    <div id="status-modal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Gerenciar Status do Atendimento</h3>
+                <i data-lucide="x" class="close-modal" id="close-status-modal"></i>
+            </div>
+            
+            <form id="add-status-form" class="flex gap-2" style="margin-bottom: 1.5rem; background: #f8fafc; padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                <div style="flex: 2;">
+                    <label style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Novo Status</label>
+                    <input type="text" id="new-status-name" class="input" placeholder="Ex: Aguardando Documentos" required>
+                </div>
+                <div style="flex: 1;">
+                    <label style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Cor</label>
+                    <input type="color" id="new-status-color" class="input" value="#3b82f6" style="padding: 2px; height: 2.5rem;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="align-self: flex-end; height: 2.5rem;">Adicionar</button>
+            </form>
+
+            <div id="status-list-container">
+                <p class="text-center" style="padding: 1rem; color: var(--muted-foreground);">Carregando status...</p>
+            </div>
+            
+            <p style="font-size: 0.7rem; color: var(--muted-foreground); margin-top: 1rem;">
+                * Status em uso por leads não podem ser excluídos.
+            </p>
         </div>
     </div>
     

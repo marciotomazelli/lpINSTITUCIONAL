@@ -22,10 +22,11 @@ $email = $data['email'];
 $phone = $data['phone'];
 $specialty = $data['specialty'];
 $message = $data['message'];
+$classification = $data['classification'] ?? 'Não Cliente';
 
 try {
-    $stmt = $pdo->prepare("UPDATE leads SET name = ?, email = ?, phone = ?, specialty = ?, message = ? WHERE id = ?");
-    $stmt->execute([$name, $email, $phone, $specialty, $message, $id]);
+    $stmt = $pdo->prepare("UPDATE leads SET name = ?, email = ?, phone = ?, specialty = ?, message = ?, classification = ? WHERE id = ?");
+    $stmt->execute([$name, $email, $phone, $specialty, $message, $classification, $id]);
 
     echo json_encode(['status' => 'success']);
 } catch (PDOException $e) {

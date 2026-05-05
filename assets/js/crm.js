@@ -71,10 +71,40 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('edit-name').value = data.name || '';
             document.getElementById('edit-email').value = data.email || '';
             document.getElementById('edit-phone').value = data.phone || '';
+            document.getElementById('edit-classification').value = data.classification || 'Não Cliente';
             document.getElementById('edit-specialty').value = data.specialty || '';
             document.getElementById('edit-message').value = data.message || '';
             document.getElementById('edit-modal').classList.add('active');
             return;
+        }
+
+        // Manage Statuses
+        if (e.target.id === 'manage-statuses-btn') {
+            document.getElementById('status-modal').classList.add('active');
+            fetchStatuses();
+            return;
+        }
+
+        // Delete Status
+        const deleteStatusBtn = e.target.closest('.btn-delete-status');
+        if (deleteStatusBtn) {
+            const id = deleteStatusBtn.dataset.id;
+            if (!confirm('Deseja excluir este status?')) return;
+            try {
+                const response = await fetch('api/manage_statuses.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'delete', id })
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    fetchStatuses();
+                } else {
+                    alert(result.message || 'Erro ao excluir status');
+                }
+            } catch (error) {
+                alert('Erro de conexão');
+            }
         }
 
         // Share
@@ -127,7 +157,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Erro de conexão');
             }
         }
+
+        if (e.target.id === 'add-status-form') {
+            e.preventDefault();
+            const name = document.getElementById('new-status-name').value;
+            const color = document.getElementById('new-status-color').value;
+
+            try {
+                const response = await fetch('api/manage_statuses.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'save', name, color })
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    document.getElementById('add-status-form').reset();
+                    fetchStatuses();
+                } else {
+                    alert(result.message || 'Erro ao adicionar status');
+                }
+            } catch (error) {
+                alert('Erro de conexão');
+            }
+        }
     });
+
+    async function fetchStatuses() {
+        const container = document.getElementById('status-list-container');
+        try {
+            const response = await fetch('api/manage_statuses.php?action=list');
+            const result = await response.json();
+            if (result.status === 'success') {
+                container.innerHTML = result.data.map(st => `
+                    <div class="status-item">
+                        <span class="status-pill" style="background: ${st.color}">${st.name}</span>
+                        <button class="btn btn-outline btn-delete-status" data-id="${st.id}" style="color: red; padding: 0.25rem 0.5rem; height: auto;">
+                            <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                        </button>
+                    </div>
+                `).join('');
+                lucide.createIcons();
+            }
+        } catch (error) {
+            container.innerHTML = '<p class="text-center">Erro ao carregar status.</p>';
+        }
+    }
 
     async function updateStatus(id, status, saleValue) {
         try {
