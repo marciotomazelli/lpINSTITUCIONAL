@@ -188,14 +188,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('api/manage_statuses.php?action=list');
             const result = await response.json();
             if (result.status === 'success') {
-                container.innerHTML = result.data.map(st => `
-                    <div class="status-item">
-                        <span class="status-pill" style="background: ${st.color}">${st.name}</span>
-                        <button class="btn btn-outline btn-delete-status" data-id="${st.id}" style="color: red; padding: 0.25rem 0.5rem; height: auto;">
-                            <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
-                        </button>
+                container.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; font-weight: 700; font-size: 0.7rem; color: var(--muted-foreground); text-transform: uppercase; margin-bottom: 0.5rem; padding: 0 0.5rem;">
+                        <span>Nome do Status</span>
+                        <span>Ação</span>
                     </div>
-                `).join('');
+                    ${result.data.map(st => `
+                        <div class="status-item">
+                            <span class="status-pill" style="background: ${st.color}">${st.name}</span>
+                            <button class="btn btn-outline btn-delete-status" data-id="${st.id}" style="color: red; padding: 0.25rem 0.5rem; height: auto; border-radius: 4px;">
+                                <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                            </button>
+                        </div>
+                    `).join('')}
+                `;
                 lucide.createIcons();
             }
         } catch (error) {

@@ -308,7 +308,10 @@ if ($authenticated) {
                 <p style="font-size: 0.875rem; color: var(--muted-foreground);">Gestão de contatos recebidos</p>
             </div>
             <div class="flex gap-2">
-                <button id="manage-statuses-btn" class="btn btn-outline">Gerenciar Status</button>
+                <button id="manage-statuses-btn" class="btn btn-primary" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="settings-2" style="width: 16px; height: 16px;"></i>
+                    Gerenciar Status
+                </button>
                 <a href="./" class="btn btn-outline">Ver Site</a>
                 <a href="?logout=1" class="btn btn-outline" style="color: red;">Sair</a>
             </div>
@@ -326,12 +329,16 @@ if ($authenticated) {
             <div class="filter-group">
                 <label>Status</label>
                 <select name="status" class="select">
-                    <option value="">Todos</option>
-                    <?php foreach ($all_statuses as $st): ?>
-                        <option value="<?php echo htmlspecialchars($st['name']); ?>" <?php echo ($_GET['status'] ?? '') === $st['name'] ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($st['name']); ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <option value="">Todos os Status</option>
+                    <?php if (empty($all_statuses)): ?>
+                        <option disabled>Nenhum status cadastrado</option>
+                    <?php else: ?>
+                        <?php foreach ($all_statuses as $st): ?>
+                            <option value="<?php echo htmlspecialchars($st['name']); ?>" <?php echo ($_GET['status'] ?? '') === $st['name'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($st['name']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </select>
             </div>
             
