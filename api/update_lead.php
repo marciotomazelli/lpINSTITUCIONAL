@@ -1,9 +1,9 @@
 <?php
+header('Content-Type: application/json');
 require_once '../config.php';
 session_start();
 
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header('Content-Type: application/json');
     echo json_encode(['status' => 'error', 'message' => 'Unauthorized']);
     exit;
 }
@@ -11,19 +11,23 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (!$data || !isset($data['id'])) {
-    header('Content-Type: application/json');
-    echo json_encode(['status' => 'error', 'message' => 'Invalid data']);
+    echo json_encode(['status' => 'error', 'message' => 'Dados inválidos']);
     exit;
 }
 
 $id = $data['id'];
-$name = $data['name'];
-$email = $data['email'];
-$phone = $data['phone'];
-$specialty = $data['specialty'];
-$message = $data['message'];
+$name = $data['name'] ?? '';
+$email = $data['email'] ?? '';
+$phone = $data['phone'] ?? '';
+$specialty = $data['specialty'] ?? '';
+$message = $data['message'] ?? '';
 $classification = $data['classification'] ?? 'Não Cliente';
 $status = $data['status'] ?? 'Novo';
+
+if (empty($name)) {
+    echo json_encode(['status' => 'error', 'message' => 'Nome é obrigatório']);
+    exit;
+}
 
 try {
     $stmt = $pdo->prepare("UPDATE leads SET name = ?, email = ?, phone = ?, specialty = ?, message = ?, classification = ?, status = ? WHERE id = ?");
@@ -31,6 +35,5 @@ try {
 
     echo json_encode(['status' => 'success']);
 } catch (PDOException $e) {
-    header('Content-Type: application/json');
-    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+    echo json_encode(['status' => 'error', 'message' => 'Erro no banco de dados: ' . $e->getMessage()]);
 }

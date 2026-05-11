@@ -380,7 +380,7 @@ if ($authenticated) {
                 </thead>
                 <tbody>
                     <?php if (empty($leads)): ?>
-                        <tr><td colspan="7" class="text-center" style="padding: 3rem;">Nenhum lead encontrado.</td></tr>
+                        <tr><td colspan="8" class="text-center" style="padding: 3rem;">Nenhum lead encontrado.</td></tr>
                     <?php else: ?>
                         <?php foreach ($leads as $lead): ?>
                             <tr id="lead-<?php echo $lead['id']; ?>">
@@ -527,6 +527,8 @@ if ($authenticated) {
                 <button type="submit" class="btn btn-primary">Confirmar e Salvar</button>
             </form>
         </div>
+    </div>
+
     <!-- Manage Statuses Modal -->
     <div id="status-modal" class="modal">
         <div class="modal-content" style="max-width: 600px;">

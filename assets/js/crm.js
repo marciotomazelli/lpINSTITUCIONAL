@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (row) row.remove();
                     else location.reload();
                 } else {
-                    alert('Erro ao excluir lead');
+                    alert(result.message || 'Erro ao excluir lead');
                 }
             } catch (error) {
                 alert('Erro de conexão');
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (result.status === 'success') {
                     location.reload();
                 } else {
-                    alert('Erro ao atualizar contato');
+                    alert(result.message || 'Erro ao atualizar contato');
                 }
             } catch (error) {
                 alert('Erro de conexão');
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.status === 'success') {
                 location.reload();
             } else {
-                alert('Erro ao atualizar status');
+                alert(result.message || 'Erro ao atualizar status');
                 location.reload();
             }
         } catch (error) {

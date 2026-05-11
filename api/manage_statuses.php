@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit;
 }
 
-$data = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents('php://input'), true) ?? [];
 $action = $data['action'] ?? $_GET['action'] ?? '';
 
 header('Content-Type: application/json');
