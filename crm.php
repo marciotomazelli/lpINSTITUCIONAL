@@ -168,11 +168,12 @@ if ($authenticated) {
             }
             td:nth-of-type(1):before { content: "Data"; }
             td:nth-of-type(2):before { content: "Cliente"; }
-            td:nth-of-type(3):before { content: "Especialidade"; }
-            td:nth-of-type(4):before { content: "Mensagem"; }
-            td:nth-of-type(5):before { content: "Status"; }
-            td:nth-of-type(6):before { content: "Valor"; }
-            td:nth-of-type(7):before { content: "Ações"; }
+            td:nth-of-type(3):before { content: "Classificação"; }
+            td:nth-of-type(4):before { content: "Especialidade"; }
+            td:nth-of-type(5):before { content: "Mensagem"; }
+            td:nth-of-type(6):before { content: "Status"; }
+            td:nth-of-type(7):before { content: "Valor"; }
+            td:nth-of-type(8):before { content: "Ações"; }
             
             /* Specific cell styles for better stacking */
             td strong { display: block; font-size: 1rem; margin-bottom: 0.25rem; }
@@ -472,7 +473,7 @@ if ($authenticated) {
                     <label style="font-size: 0.75rem; font-weight: 700;">Classificação</label>
                     <select name="classification" id="edit-classification" class="select" required>
                         <option value="Não Cliente">Não Cliente</option>
-                        <option value="Cliente">Já é Cliente</option>
+                        <option value="Já é Cliente">Já é Cliente</option>
                         <option value="Suporte">Suporte</option>
                         <option value="Parceiro">Parceiro</option>
                     </select>

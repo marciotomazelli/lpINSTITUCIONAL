@@ -30,8 +30,27 @@ if (empty($name)) {
 }
 
 try {
-    $stmt = $pdo->prepare("UPDATE leads SET name = ?, email = ?, phone = ?, specialty = ?, message = ?, classification = ?, status = ? WHERE id = ?");
-    $stmt->execute([$name, $email, $phone, $specialty, $message, $classification, $status, $id]);
+    $sql = "UPDATE `leads` SET 
+            `name` = :name, 
+            `email` = :email, 
+            `phone` = :phone, 
+            `specialty` = :specialty, 
+            `message` = :message, 
+            `classification` = :classification, 
+            `status` = :status 
+            WHERE `id` = :id";
+            
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':name' => $name,
+        ':email' => $email,
+        ':phone' => $phone,
+        ':specialty' => $specialty,
+        ':message' => $message,
+        ':classification' => $classification,
+        ':status' => $status,
+        ':id' => $id
+    ]);
 
     echo json_encode(['status' => 'success']);
 } catch (PDOException $e) {
