@@ -7,6 +7,42 @@
     <title>EstéticaBio — Produtos Estéticos com Segurança e Regularização ANVISA</title>
     <meta name="description" content="Distribuidora autorizada de produtos para harmonização facial com registro ANVISA, rastreabilidade de lotes e atendimento consultivo. Compre com segurança.">
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.esteticabio.com.br/">
+    <meta property="og:title" content="EstéticaBio — Produtos Estéticos com Segurança">
+    <meta property="og:description" content="Distribuidora autorizada de produtos para harmonização facial com registro ANVISA. Segurança e Procedência.">
+    <meta property="og:image" content="https://www.esteticabio.com.br/assets/img/logo-esteticabio.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.esteticabio.com.br/">
+    <meta property="twitter:title" content="EstéticaBio — Produtos Estéticos com Segurança">
+    <meta property="twitter:description" content="Distribuidora autorizada de produtos para harmonização facial com registro ANVISA. Segurança e Procedência.">
+    <meta property="twitter:image" content="https://www.esteticabio.com.br/assets/img/logo-esteticabio.png">
+    
+    <!-- Schema.org for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "EstéticaBio",
+      "url": "https://www.esteticabio.com.br",
+      "logo": "https://www.esteticabio.com.br/assets/img/logo-esteticabio.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-16-3524-1764",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://www.instagram.com/esteticabio",
+        "https://www.facebook.com/esteticabio"
+      ]
+    }
+    </script>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,6 +132,7 @@
     </style>
     
     <link rel="icon" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
 </head>
 <body class="flex min-h-screen flex-col">
 
