@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstéticaBio — Links Úteis</title>
+    <meta name="description" content="Acesse nossos canais de atendimento, faça seu cadastro ou visite nosso site oficial.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(174 82% 38%)',
+                        whatsapp: 'hsl(142 70% 45%)',
+                        background: 'hsl(30 20% 98%)',
+                        foreground: 'hsl(25 10% 15%)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            min-height: 100vh;
+        }
+        .link-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .link-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    
+    <link rel="icon" href="favicon.png">
+</head>
+<body class="flex flex-col items-center px-4 py-12 text-foreground antialiased">
+
+    <!-- Profile/Logo Section -->
+    <div class="mb-10 text-center">
+        <div class="mb-6 inline-block rounded-3xl bg-white p-6 shadow-xl">
+            <img src="assets/img/logo-esteticabio.png" alt="EstéticaBio" class="h-16">
+        </div>
+        <h1 class="text-2xl font-extrabold tracking-tight">EstéticaBio</h1>
+        <p class="mt-2 text-muted-foreground font-medium opacity-75">Sua distribuidora de confiança</p>
+    </div>
+
+    <!-- Links Section -->
+    <div class="w-full max-w-md space-y-4">
+        
+        <!-- WhatsApp -->
+        <a href="https://wa.me/5516991232051?text=Conheci%20a%20EstéticaBio%20pelo%20instagram,%20poderia%20me%20ajudar?" 
+           target="_blank" 
+           class="link-card flex items-center justify-between rounded-2xl bg-white p-5 shadow-md border border-transparent hover:border-whatsapp/30">
+            <div class="flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-whatsapp/10 text-whatsapp">
+                    <i data-lucide="message-circle" class="h-6 w-6"></i>
+                </div>
+                <div>
+                    <span class="block font-bold text-lg">WhatsApp Atendimento</span>
+                    <span class="text-xs text-gray-500 font-medium">Fale agora com um especialista</span>
+                </div>
+            </div>
+            <i data-lucide="chevron-right" class="h-5 w-5 text-gray-400"></i>
+        </a>
+
+        <!-- Cadastro -->
+        <a href="https://digital.esteticabio.com.br/cadastro-oficial-esteticabio" 
+           target="_blank" 
+           class="link-card flex items-center justify-between rounded-2xl bg-white p-5 shadow-md border border-transparent hover:border-primary/30">
+            <div class="flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <i data-lucide="user-plus" class="h-6 w-6"></i>
+                </div>
+                <div>
+                    <span class="block font-bold text-lg">Cadastro para Compras</span>
+                    <span class="text-xs text-gray-500 font-medium">Seja nosso cliente oficial</span>
+                </div>
+            </div>
+            <i data-lucide="chevron-right" class="h-5 w-5 text-gray-400"></i>
+        </a>
+
+        <!-- Loja Virtual -->
+        <a href="http://www.esteticabiostore.com.br" 
+           target="_blank" 
+           class="link-card flex items-center justify-between rounded-2xl bg-white p-5 shadow-md border border-transparent hover:border-primary/30">
+            <div class="flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <i data-lucide="shopping-cart" class="h-6 w-6"></i>
+                </div>
+                <div>
+                    <span class="block font-bold text-lg">Loja Virtual</span>
+                    <span class="text-xs text-gray-500 font-medium">Compre online com segurança</span>
+                </div>
+            </div>
+            <i data-lucide="chevron-right" class="h-5 w-5 text-gray-400"></i>
+        </a>
+
+        <!-- Site Oficial -->
+        <a href="https://www.esteticabio.com.br" 
+           target="_blank" 
+           class="link-card flex items-center justify-between rounded-2xl bg-white p-5 shadow-md border border-transparent hover:border-primary/30">
+            <div class="flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <i data-lucide="globe" class="h-6 w-6"></i>
+                </div>
+                <div>
+                    <span class="block font-bold text-lg">Nosso Site</span>
+                    <span class="text-xs text-gray-500 font-medium">Conheça nossa história e produtos</span>
+                </div>
+            </div>
+            <i data-lucide="chevron-right" class="h-5 w-5 text-gray-400"></i>
+        </a>
+
+    </div>
+
+    <!-- Social Footer -->
+    <div class="mt-12 flex gap-6">
+        <a href="https://instagram.com/esteticabio" target="_blank" class="text-gray-400 transition-colors hover:text-primary">
+            <i data-lucide="instagram" class="h-6 w-6"></i>
+        </a>
+        <a href="https://facebook.com/esteticabio" target="_blank" class="text-gray-400 transition-colors hover:text-primary">
+            <i data-lucide="facebook" class="h-6 w-6"></i>
+        </a>
+        <a href="https://wa.me/5516991232051" target="_blank" class="text-gray-400 transition-colors hover:text-primary">
+            <i data-lucide="message-circle" class="h-6 w-6"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-12 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">
+        © <span id="year"></span> EstéticaBio
+    </div>
+
+    <script>
+        // Init Lucide
+        lucide.createIcons();
+        // Set year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

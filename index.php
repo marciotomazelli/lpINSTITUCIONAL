@@ -111,6 +111,9 @@
           <a href="#produtos" class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Produtos</a>
           <a href="#diferenciais" class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Diferenciais</a>
           <a href="#depoimentos" class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Depoimentos</a>
+          <a href="http://www.esteticabiostore.com.br" target="_blank" class="text-sm font-bold text-primary transition-colors hover:text-foreground flex items-center gap-1">
+            <i data-lucide="shopping-cart" class="h-4 w-4"></i> Loja Virtual
+          </a>
           <a href="#contato" class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Contato</a>
           <a href="https://wa.me/5516991232051?text=Gostaria%20de%20falar%20com%20o%20especialista%20consultor%20de%20vendas" target="_blank" class="inline-flex items-center justify-center rounded-md bg-whatsapp px-4 py-2 text-sm font-medium text-whatsapp-foreground shadow hover:bg-whatsapp/90 transition-all">
             <i data-lucide="message-circle" class="mr-1.5 h-4 w-4"></i> WhatsApp
@@ -128,6 +131,9 @@
           <a href="#produtos" class="text-base font-medium text-foreground py-2 link-mobile">Produtos</a>
           <a href="#diferenciais" class="text-base font-medium text-foreground py-2 link-mobile">Diferenciais</a>
           <a href="#depoimentos" class="text-base font-medium text-foreground py-2 link-mobile">Depoimentos</a>
+          <a href="http://www.esteticabiostore.com.br" target="_blank" class="text-base font-bold text-primary py-2 link-mobile flex items-center gap-2">
+            <i data-lucide="shopping-cart" class="h-5 w-5"></i> Loja Virtual
+          </a>
           <a href="#contato" class="text-base font-medium text-foreground py-2 link-mobile">Contato</a>
           <a href="https://wa.me/5516991232051?text=Gostaria%20de%20falar%20com%20o%20especialista%20consultor%20de%20vendas" target="_blank" class="flex items-center justify-center rounded-lg bg-whatsapp py-3 text-sm font-bold text-whatsapp-foreground">
             <i data-lucide="message-circle" class="mr-2 h-5 w-5"></i> WhatsApp
@@ -652,6 +658,7 @@
                     <a href="#produtos" class="hover:text-primary transition-colors">Produtos</a>
                     <a href="#diferenciais" class="hover:text-primary transition-colors">Diferenciais</a>
                     <a href="#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a>
+                    <a href="http://www.esteticabiostore.com.br" target="_blank" class="hover:text-primary transition-colors font-bold">Loja Virtual</a>
                     <a href="#contato" class="hover:text-primary transition-colors">Contato</a>
                 </div>
                 <p class="text-xs text-gray-500 font-medium">© <?php echo date('Y'); ?> EstéticaBio. Todos os direitos reservados.</p>
